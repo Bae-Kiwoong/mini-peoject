@@ -1,17 +1,39 @@
-import Header from './components/Header';
-import Home from './pages/Home';
+import Header from "./components/Header";
+import BodyMain from "./components/BodyMain";
+import Footer from "./components/Footer";
+
+import Card from "./components/Card";
+import data from "./mokData";//임시 등록 파일
+
 
 
 function App() {
+  
+  console.log(data);
+  
 
   return(
-    <div>
+    <div className="fixed-wrapper">
+      <div className="hd">
       <Header />
-    <div className='container'>
-      <h1>본문내용</h1>
-    </div>
+      </div>
+      <div className="bm"> 
+      <BodyMain />
+      <Card  data={data}/>
+      </div>
+       
+        
+      
+      <div className="ft">
+      <Footer />
+      </div>
 
-  </div>
+      </div>
+      
+
+        
+       
+      
   
     
   )
