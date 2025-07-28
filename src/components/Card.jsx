@@ -15,12 +15,28 @@ function Card({ filteredData, onBack, onCardClick, onDelete }) {
       >
         뒤로가기
       </button>
-      <div style={{display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', justifyContent: 'center', padding: '1rem'}}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4,1fr)',
+          gap: '1rem',
+          justifyContent: 'center',
+          padding: '1rem',
+          height: '420px', 
+          overflowY: 'auto'
+        }}
+      >
         {filteredData.map((data, i) => (
           <div
             className="card"
             key={i}
-            style={{width:'200px', height:"200px", cursor: 'pointer', backgroundColor:'#2b3035aa', color:'white'}}
+            style={{
+              width: '200px',
+              height: "200px",
+              cursor: 'pointer',
+              backgroundColor: '#2b3035aa',
+              color: 'white'
+            }}
           >
             <div className="card-body" onClick={() => onCardClick(data)}>
               <h5 className="card-title">{data.title}</h5>

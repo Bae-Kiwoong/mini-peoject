@@ -9,6 +9,7 @@ import initialData from "./mokData";
 import CategoryList from "./components/CategoryList";
 
 function App() {
+  
   const [category, setCategory] = useState(null);
   const [recent, setRecent] = useState([]);
   const [data, setData] = useState(initialData);
