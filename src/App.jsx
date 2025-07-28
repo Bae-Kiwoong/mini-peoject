@@ -6,13 +6,15 @@ import Card from "./components/Card";
 import CategorySelector from "./components/CategorySelector";
 import WriteForm from "./components/WriteForm";
 import initialData from "./mokData";
+import CategoryList from "./components/CategoryList";
 
 function App() {
-  
-  const [category, setCategory] = useState(null); 
+  const [category, setCategory] = useState(null);
   const [recent, setRecent] = useState([]);
   const [data, setData] = useState(initialData);
   const [showWrite, setShowWrite] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
+  const [categories, setCategories] = useState(["REACT", "CSS", "JAVA"]);
 
   const filteredData = data.filter(item => item.category === category);
 
@@ -35,6 +37,13 @@ function App() {
     setShowWrite(false);
   };
 
+  // 카테고리 추가
+  const handleAddCategory = (newCat) => {
+    if (newCat && !categories.includes(newCat)) {
+      setCategories([...categories, newCat]);
+    }
+  };
+
   return (
     <div className="fixed-wrapper">
       <div className="hd">
@@ -42,14 +51,38 @@ function App() {
           onHome={() => {
             setCategory(null);
             setShowWrite(false);
+            setShowCategories(false);
           }}
-          onWrite={() => setShowWrite(true)}
+          onWrite={() => {
+            setShowWrite(true);
+            setShowCategories(false);
+          }}
+          onList={() => {
+            setShowCategories(true);
+            setCategory(null);
+            setShowWrite(false);
+          }}
         />
       </div>
       <div className="bm">
         <BodyMain />
-        {showWrite ? (
-          <WriteForm onAdd={handleAdd} onCancel={() => setShowWrite(false)} />
+       
+       
+        {showCategories ? (
+          <CategoryList
+            categories={categories}
+            onSelect={cat => {
+              setCategory(cat);
+              setShowCategories(false);
+            }}
+            onAddCategory={handleAddCategory}
+          />
+        ) : showWrite ? (
+          <WriteForm
+            onAdd={handleAdd}
+            onCancel={() => setShowWrite(false)}
+            categories={categories}
+          />
         ) : category === null ? (
           <CategorySelector onSelect={setCategory} />
         ) : (

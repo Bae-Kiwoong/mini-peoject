@@ -20,7 +20,7 @@ function Card({ filteredData, onBack, onCardClick, onDelete }) {
           <div
             className="card"
             key={i}
-            style={{width:'200px', height:"200px", cursor: 'pointer'}}
+            style={{width:'200px', height:"200px", cursor: 'pointer', backgroundColor:'#2b3035aa', color:'white'}}
           >
             <div className="card-body" onClick={() => onCardClick(data)}>
               <h5 className="card-title">{data.title}</h5>

@@ -6,7 +6,7 @@
 .fixed-wrapper {
   width: 1000px;
   height: 1500px;
-
+  
   margin:  auto;
   background-color: #2b3035;
 
@@ -30,7 +30,7 @@
 .ft{
 
   width: 100%;
-  height: 400px;
+  height: 300px;
   padding: 0px;
   background-color: #2b3035;
   color: white;
@@ -38,4 +38,12 @@
 }
 body {
   background-color: #2b3035;
+}
+.card {
+  transition: transform 0.1s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  z-index: 1;
 }

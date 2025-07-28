@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-function WriteForm({ onAdd, onCancel }) {
+function WriteForm({ onAdd, onCancel, categories }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("REACT");
+  const [category, setCategory] = useState(categories[0] || "");
 
   return (
     <div
@@ -12,7 +12,7 @@ function WriteForm({ onAdd, onCancel }) {
         color: "#fff",
         padding: "2rem",
         borderRadius: "1rem",
-        maxWidth: "600px",
+        maxWidth: "800px",
         margin: "2rem auto",
       }}
     >
@@ -50,9 +50,11 @@ function WriteForm({ onAdd, onCancel }) {
             color: "#fff",
           }}
         >
-          <option value="REACT">REACT</option>
-          <option value="CSS">CSS</option>
-          <option value="JAVA">JAVA</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
         </select>
       </div>
       <textarea
