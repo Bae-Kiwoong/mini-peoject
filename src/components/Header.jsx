@@ -1,12 +1,16 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({onHome, onWrite}) => {
  
   return (
 
    <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">MyBlog</a>
+        <a className="navbar-brand" href="#" onClick={e=>{
+          e.preventDefault();
+          onHome();
+        }}
+        style={{cursor:'pointer'}}>MyBlog</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarNav" aria-controls="navbarNav"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +23,10 @@ const Header = () => {
               <a className="nav-link active" href="#">글 목록</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">새 글 쓰기</a>
+              <a className="nav-link" href="#" onClick={e => {
+              e.preventDefault();
+                onWrite();
+              }}>새 글 쓰기</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">로그인</a>
