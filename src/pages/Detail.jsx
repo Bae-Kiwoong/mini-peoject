@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const Detail = ({data}) => {
-
-  useEffect(()=>{
-  
-  const view = JSON.parse(localStorage.getItem('watched'));
-  
-  const filtered = view.filter((item) => item.id !== post.id);
-
-  const updated = [data, ...filtered].slice(0, 3);
-
-  localStorage.setItem('watcher', JSON.stringify(updated));
-
-})
-
+const Detail = ({ data, onBack }) => {
+  if (!data) return null;
 
   return (
-    <div>
-
+    <div style={{ padding: "2rem", color: "#fff" }}>
+      <button
+        onClick={onBack}
+        style={{
+          marginBottom: "1rem",
+          padding: "0.5rem 1.5rem",
+          fontSize: "1rem",
+          borderRadius: "0.5rem",
+          background: "#eee",
+          border: "none",
+          cursor: "pointer"
+        }}
+      >
+        뒤로가기
+      </button>
       <h2>{data.title}</h2>
-      <p>{data.content}</p>
-    
-      
+      <h4 style={{ color: "#4caf50" }}>{data.category}</h4>
+      <p style={{ fontSize: "1.2rem", marginTop: "2rem" }}>{data.content}</p>
     </div>
   );
 };

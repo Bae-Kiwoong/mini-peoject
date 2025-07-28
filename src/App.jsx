@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import BodyMain from "./components/BodyMain";
 import Footer from "./components/Footer";
@@ -7,15 +7,32 @@ import CategorySelector from "./components/CategorySelector";
 import WriteForm from "./components/WriteForm";
 import initialData from "./mokData";
 import CategoryList from "./components/CategoryList";
+import Detail from "./pages/Detail";
 
 function App() {
-  
+  // 초기값을 localStorage에서 불러오도록 변경
+  const [data, setData] = useState(() => {
+    const saved = localStorage.getItem("cards");
+    return saved ? JSON.parse(saved) : initialData;
+  });
+  const [categories, setCategories] = useState(() => {
+    const saved = localStorage.getItem("categories");
+    return saved ? JSON.parse(saved) : ["REACT", "CSS", "JAVA"];
+  });
   const [category, setCategory] = useState(null);
   const [recent, setRecent] = useState([]);
-  const [data, setData] = useState(initialData);
   const [showWrite, setShowWrite] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
-  const [categories, setCategories] = useState(["REACT", "CSS", "JAVA"]);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  // 데이터 변경 시 로컬스토리지에 저장
+  useEffect(() => {
+    localStorage.setItem("cards", JSON.stringify(data));
+  }, [data]);
+
+  useEffect(() => {
+    localStorage.setItem("categories", JSON.stringify(categories));
+  }, [categories]);
 
   const filteredData = data.filter(item => item.category === category);
 
@@ -25,6 +42,7 @@ function App() {
       const updated = [item, ...prev.filter(v => v.title !== item.title)];
       return updated.slice(0, 3);
     });
+    setSelectedCard(item); // 상세화면으로 이동
   };
 
   // 카드 삭제
@@ -45,7 +63,13 @@ function App() {
     }
   };
 
+  // 뒤로가기(상세화면에서)
+  const handleBack = () => {
+    setSelectedCard(null);
+  };
+
   return (
+    
     <div className="fixed-wrapper">
       <div className="hd">
         <Header
@@ -53,6 +77,7 @@ function App() {
             setCategory(null);
             setShowWrite(false);
             setShowCategories(false);
+            setSelectedCard(null);
           }}
           onWrite={() => {
             setShowWrite(true);
@@ -67,9 +92,9 @@ function App() {
       </div>
       <div className="bm">
         <BodyMain />
-       
-       
-        {showCategories ? (
+        {selectedCard ? (
+          <Detail data={selectedCard} onBack={handleBack} />
+        ) : showCategories ? (
           <CategoryList
             categories={categories}
             onSelect={cat => {
@@ -85,7 +110,10 @@ function App() {
             categories={categories}
           />
         ) : category === null ? (
-          <CategorySelector onSelect={setCategory} />
+          <CategorySelector
+            onSelect={setCategory}
+            categories={categories}
+          />
         ) : (
           <Card
             filteredData={filteredData}
