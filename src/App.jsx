@@ -25,7 +25,7 @@ function App() {
   const [showCategories, setShowCategories] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
 
-  // 데이터 변경 시 로컬스토리지에 저장
+  
   useEffect(() => {
     localStorage.setItem("cards", JSON.stringify(data));
   }, [data]);
