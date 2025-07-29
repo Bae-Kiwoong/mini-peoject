@@ -47,7 +47,8 @@ function Card({ filteredData, search, onBack, onCardClick, onDelete }) {
                 height: "200px",
                 cursor: 'pointer',
                 backgroundColor: '#2b3035aa',
-                color: 'white'
+                color: 'white',
+                overflow: 'hidden'
               }}
             >
               <div className="card-body" onClick={() => onCardClick(data)}>

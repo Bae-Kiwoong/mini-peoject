@@ -20,7 +20,7 @@ function App() {
   });
   const [categories, setCategories] = useState(() => {
     const saved = localStorage.getItem("categories");
-    return saved ? JSON.parse(saved) : ["REACT", "CSS", "JAVA"];
+    return saved ? JSON.parse(saved) : ["REACT", "CSS", "JAVA","DB"];
   });
   const [category, setCategory] = useState(null);
   const [recent, setRecent] = useState([]);
