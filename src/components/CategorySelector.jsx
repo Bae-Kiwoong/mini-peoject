@@ -4,7 +4,8 @@ function CategorySelector({ onSelect }) {
   const categories = [
     { name: 'REACT', img: '/src/assets/react.svg' },
     { name: 'CSS', img: '/src/assets/css.svg' },
-    { name: 'JAVA', img: '/src/assets/java.svg' }
+    { name: 'JAVA', img: '/src/assets/java.svg' },
+    { name: 'DB', img: '/src/assets/db.svg'},
   ];
 
   return (
@@ -16,7 +17,7 @@ function CategorySelector({ onSelect }) {
       height: '300px'
     }}>
       {categories.map(cat => (
-        <button
+        <button className='category-btn'
           key={cat.name}
           style={{
             width: '200px',
@@ -42,7 +43,8 @@ function CategorySelector({ onSelect }) {
               height: '100%',
               objectFit: 'cover',
               display: 'block',
-              borderRadius: '1rem'
+              borderRadius: '1rem',
+              filter: 'brightness(0.9)'
             }}
           />
         </button>

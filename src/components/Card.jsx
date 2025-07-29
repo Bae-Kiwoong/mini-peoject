@@ -1,4 +1,11 @@
-function Card({ filteredData, onBack, onCardClick, onDelete }) {
+function Card({ filteredData, search, onBack, onCardClick, onDelete }) {
+  const searchedData = search
+    ? filteredData.filter(item =>
+        item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.content.toLowerCase().includes(search.toLowerCase())
+      )
+    : filteredData;
+
   return (
     <>
       <button
@@ -26,25 +33,31 @@ function Card({ filteredData, onBack, onCardClick, onDelete }) {
           overflowY: 'auto'
         }}
       >
-        {filteredData.map((data, i) => (
-          <div
-            className="card"
-            key={i}
-            style={{
-              width: '200px',
-              height: "200px",
-              cursor: 'pointer',
-              backgroundColor: '#2b3035aa',
-              color: 'white'
-            }}
-          >
-            <div className="card-body" onClick={() => onCardClick(data)}>
-              <h5 className="card-title">{data.title}</h5>
-              <p className="card-text">{data.content}</p>
-              <button onClick={e => { e.stopPropagation(); onDelete(data.title); }}>삭제</button>
-            </div>
+        {filteredData.length === 0 ? (
+          <div style={{ color: '#fff', fontSize: '1.2rem', textAlign: 'center', gridColumn: 'span 4' }}>
+            검색 결과가 없습니다.
           </div>
-        ))}
+        ) : (
+          filteredData.map((data, i) => (
+            <div
+              className="card"
+              key={i}
+              style={{
+                width: '200px',
+                height: "200px",
+                cursor: 'pointer',
+                backgroundColor: '#2b3035aa',
+                color: 'white'
+              }}
+            >
+              <div className="card-body" onClick={() => onCardClick(data)}>
+                <h5 className="card-title">{data.title}</h5>
+                <p className="card-text">{data.content}</p>
+                <button onClick={e => { e.stopPropagation(); onDelete(data.title); }}>삭제</button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </>
   );

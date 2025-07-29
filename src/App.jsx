@@ -10,6 +10,9 @@ import CategoryList from "./components/CategoryList";
 import Detail from "./pages/Detail";
 
 function App() {
+
+  const [search, setSearch] = useState("");
+
   // 초기값을 localStorage에서 불러오도록 변경
   const [data, setData] = useState(() => {
     const saved = localStorage.getItem("cards");
@@ -34,7 +37,16 @@ function App() {
     localStorage.setItem("categories", JSON.stringify(categories));
   }, [categories]);
 
-  const filteredData = data.filter(item => item.category === category);
+  const filteredData = category
+    ? data.filter(item => item.category === category)
+    : data;
+
+  const searchedData = search
+    ? filteredData.filter(item =>
+        item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.content.toLowerCase().includes(search.toLowerCase())
+      )
+    : filteredData;
 
   // 카드 클릭 시 최근 본 내용에 추가
   const handleCardClick = (item) => {
@@ -91,7 +103,7 @@ function App() {
         />
       </div>
       <div className="bm">
-        <BodyMain />
+        <BodyMain search={search} setSearch={setSearch} />
         {selectedCard ? (
           <Detail data={selectedCard} onBack={handleBack} />
         ) : showCategories ? (
@@ -116,7 +128,8 @@ function App() {
           />
         ) : (
           <Card
-            filteredData={filteredData}
+            filteredData={searchedData}
+            search={search}
             onBack={() => setCategory(null)}
             onCardClick={handleCardClick}
             onDelete={handleDelete}
@@ -124,7 +137,10 @@ function App() {
         )}
       </div>
       <div className="ft">
-        <Footer recent={recent} onRecentClick={item => setCategory(item.category)} />
+        <Footer
+          recent={recent}
+          onRecentClick={item => setSelectedCard(item)} 
+        />
       </div>
     </div>
   );
