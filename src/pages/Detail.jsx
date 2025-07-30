@@ -1,7 +1,11 @@
 import React from 'react';
+import { useParams } from "react-router-dom";
 
-const Detail = ({ data, onBack }) => {
-  if (!data) return null;
+const Detail = ({ dataList, onBack }) => {
+  const { id } = useParams();
+  // dataList에서 id로 해당 데이터 찾기
+  const data = dataList.find(item => String(item.id) === String(id));
+  if (!data) return <div style={{ color: "#fff", padding: "2rem" }}>데이터를 찾을 수 없습니다.</div>;
 
   return (
     <div style={{ padding: "2rem", color: "#fff" }}>

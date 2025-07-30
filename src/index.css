@@ -48,6 +48,7 @@ body {
   transform: scale(1.05);
   z-index: 1;
   background: linear-gradient(120deg, #232526 0%, #414345 100%);
+  border: 1px solid rgba(255, 255, 255, 0.726);
 }
 .category-btn {
   transition: transform 0.18s, box-shadow 0.18s;

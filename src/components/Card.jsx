@@ -29,22 +29,22 @@ function Card({ filteredData, search, onBack, onCardClick, onDelete }) {
           gap: '1rem',
           justifyContent: 'center',
           padding: '1rem',
-          height: '420px', 
+          height: '420px',
           overflowY: 'auto'
         }}
       >
-        {filteredData.length === 0 ? (
+        {searchedData.length === 0 ? (
           <div style={{ color: '#fff', fontSize: '1.2rem', textAlign: 'center', gridColumn: 'span 4' }}>
             검색 결과가 없습니다.
           </div>
         ) : (
-          filteredData.map((data, i) => (
+          searchedData.map((data, i) => (
             <div
               className="card"
-              key={i}
+              key={data.id}
               style={{
                 width: '200px',
-                height: "200px",
+                height: "190px",
                 cursor: 'pointer',
                 backgroundColor: '#2b3035aa',
                 color: 'white',
@@ -52,9 +52,22 @@ function Card({ filteredData, search, onBack, onCardClick, onDelete }) {
               }}
             >
               <div className="card-body" onClick={() => onCardClick(data)}>
-                <h5 className="card-title">{data.title}</h5>
-                <p className="card-text">{data.content}</p>
-                <button onClick={e => { e.stopPropagation(); onDelete(data.title); }}>삭제</button>
+                <h5 className="card-title" style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis"
+                }}>{data.title}</h5>
+                <p className="card-text" style={{
+                  maxHeight: "80px",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis"
+                }}>{data.content}</p>
+                <button
+                  onClick={e => {
+                    e.stopPropagation();
+                    onDelete(data.title);
+                  }}
+                >삭제</button>
               </div>
             </div>
           ))
