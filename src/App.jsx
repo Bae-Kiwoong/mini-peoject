@@ -78,13 +78,12 @@ function App() {
 
   // 새 글 추가
   const handleAdd = (newCard) => {
-    // id 생성: 현재 데이터 중 가장 큰 id + 1, 없으면 0
     const nextId =
       data.length > 0
         ? (Math.max(...data.map(item => Number(item.id) || 0)) + 1).toString()
         : "0";
     setData(prev => [{ ...newCard, id: nextId }, ...prev]);
-    setShowWrite(false);
+    navigate("/"); // 글 등록 후 메인으로 이동
   };
 
   // 카테고리 추가

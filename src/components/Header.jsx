@@ -21,7 +21,7 @@ const Header = ({onHome, onWrite, onList}) => {
               <a className="nav-link active" href="#" onClick={e => {
                 e.preventDefault();
                 onList();
-              }}>글 목록</a>
+              }}>카테고리 목록</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={e => {
