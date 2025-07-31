@@ -22,10 +22,10 @@ function Card({ filteredData, search, onBack, onCardClick, onDelete }) {
       >
         뒤로가기
       </button>
-      <div
+      <div className="category-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4,1fr)',
+          // gridTemplateColumns: 'repeat(4,1fr)',
           gap: '1rem',
           justifyContent: 'center',
           padding: '1rem',
@@ -43,7 +43,7 @@ function Card({ filteredData, search, onBack, onCardClick, onDelete }) {
               className="card"
               key={data.id}
               style={{
-                width: '200px',
+                width: '100%',
                 height: "190px",
                 cursor: 'pointer',
                 backgroundColor: '#2b3035aa',

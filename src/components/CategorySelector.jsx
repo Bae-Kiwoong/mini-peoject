@@ -9,18 +9,12 @@ function CategorySelector({ onSelect }) {
   ];
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: '2rem',
-      height: '300px'
-    }}>
+    <div className="category-grid" >
       {categories.map(cat => (
         <button className='category-btn'
           key={cat.name}
           style={{
-            width: '200px',
+            width: '100%',
             height: '200px',
             borderRadius: '1rem',
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
