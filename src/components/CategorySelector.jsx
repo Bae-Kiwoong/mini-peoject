@@ -2,10 +2,10 @@ import React from 'react';
 
 function CategorySelector({ onSelect }) {
   const categories = [
-    { name: 'REACT', img: '/src/assets/react.svg' },
-    { name: 'CSS', img: '/src/assets/css.svg' },
-    { name: 'JAVA', img: '/src/assets/java.svg' },
-    { name: 'DB', img: '/src/assets/db.svg'},
+    { name: 'REACT', img: '/public/assets/react.svg' },
+    { name: 'CSS', img: '/public/assets/css.svg' },
+    { name: 'JAVA', img: '/public/assets/java.svg' },
+    { name: 'DB', img: '/public/assets/db.svg'},
   ];
 
   return (
@@ -30,7 +30,7 @@ function CategorySelector({ onSelect }) {
           onClick={() => onSelect(cat.name)}
         >
           <img
-            src={cat.img}
+            src={`/assets/${cat.name.toLowerCase()}.svg`}
             alt={cat.name}
             style={{
               width: '100%',
