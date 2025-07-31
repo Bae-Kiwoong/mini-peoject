@@ -40,7 +40,8 @@ function SearchModal({ results, onClose, onResultClick }) {
             border: "none",
             color: "#fff",
             fontSize: "2rem",
-            cursor: "pointer"
+            cursor: "pointer",
+            marginRight:"1rem",
           }}
         >×</button>
         <h3 style={{ marginBottom: "1.5rem" }}>검색 결과</h3>
